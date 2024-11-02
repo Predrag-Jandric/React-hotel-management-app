@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
+import { useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createCabin } from "../../services/apiCabins";
+
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
 import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
-import { useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createCabin } from "../../services/apiCabins";
 import toast from "react-hot-toast";
 
 const FormRow = styled.div`
@@ -46,14 +47,8 @@ const Error = styled.span`
   color: var(--color-red-700);
 `;
 
-function CreateCabinForm({ cabinToEdit = {} }) {
-const {id: editId, ...editValue} = cabinToEdit
-
-const isEditSession = Boolean(editId)
-
-  const { register, handleSubmit, reset, getValues, formState } = useForm({
-    defaultValues: isEditSession ? editValue : {},
-  });
+function CreateCabinForm() {
+  const { register, handleSubmit, reset, getValues, formState } = useForm();
 
   const { errors } = formState;
   console.log(errors);
@@ -73,7 +68,7 @@ const isEditSession = Boolean(editId)
   });
 
   function onSubmit(data) {
-    mutate({ ...data, image: data.image[0] });
+    mutate({...data, image: data.image[0]});
   }
 
   function onError(errors) {
@@ -153,14 +148,9 @@ const isEditSession = Boolean(editId)
 
       <FormRow>
         <Label htmlFor="image">Cabin photo</Label>
-        <FileInput
-          type="file"
-          id="image"
-          accept="image/*"
-          {...register("image", {
+        <FileInput type="file" id="image" accept="image/*" {...register("image", {
             required: "This field is required",
-          })}
-        />
+          })} />
       </FormRow>
 
       <FormRow>
