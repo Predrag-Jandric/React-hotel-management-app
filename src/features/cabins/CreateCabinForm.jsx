@@ -89,9 +89,10 @@ function CreateCabinForm({ cabinToEdit = {} }) {
   const isWorking = isCreating || isEditing;
 
   function onSubmit(data) {
-const image = typeof data.image === "string" ? data.image : data.image[0]
+    const image = typeof data.image === "string" ? data.image : data.image[0];
 
-    if (isEditSession) editCabin({newCabinData: {...data, image}, id: editId});
+    if (isEditSession)
+      editCabin({ newCabinData: { ...data, image }, id: editId });
     else createCabin({ ...data, image: image });
   }
 
@@ -171,7 +172,6 @@ const image = typeof data.image === "string" ? data.image : data.image[0]
           type="number"
           id="description"
           defaultValue=""
-          disabled={isWorking}
         />
       </FormRow>
 
