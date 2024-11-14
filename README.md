@@ -1,7 +1,5 @@
 # React, supabase - hotel management app
 
-# 🔗 [Live Preview](/live link of project deployed on Netlify etc/)
-
 ![Design preview](./src/assets/preview.png)
 
 ---
